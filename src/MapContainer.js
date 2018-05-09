@@ -1,7 +1,18 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
+import { loadavg } from 'os';
 
 export default class MapContainer extends Component {
+  constructor(props) {
+    super(props)
+    this.locations =    [
+      {title: 'Shopping Benfica', location: {lat: -3.738977, lng: -38.539653}},
+      {title: 'Mandir Restaurante Vegano', location: {lat: -3.744030,  lng: -38.539632 }},
+      {title: 'Estadio Presidente Vagas', location: {lat: -3.745876,  lng: -38.536753 }},
+      {title: 'Complexo Ktorze Estudio', location: {lat: -3.738676,  lng: -38.541996 }},
+      {title: 'Pracinha da Gentilandia', location: {lat: -3.743473,  lng: -38.537072 }}
+    ]
+  }
 
   componentDidMount() {
     this.loadMap(); // call loadMap function to load the google map
@@ -12,18 +23,36 @@ export default class MapContainer extends Component {
       
     if (this.props && this.props.google) { // checks to make sure that props have been passed
       const {google} = this.props; // sets props equal to google
+
       const maps = google.maps; // sets maps to google maps props
+console.log(this);
 
       const mapRef = this.refs.map; // looks for HTML div ref 'map'. Returned in render below.
       const node = ReactDOM.findDOMNode(mapRef); // finds the 'map' div in the React DOM, names it node
 
       const mapConfig = Object.assign({}, {
-        center: {lat: 40.7485722, lng: -74.0068633}, // sets center of google map to NYC.
-        zoom: 11, // sets zoom. Lower numbers are zoomed further out.
+        center: {    
+          lat: -3.739844,
+          lng: -38.540374}, // sets center of google map to NYC.
+        zoom: 15, // sets zoom. Lower numbers are zoomed further out.
         mapTypeId: 'roadmap' // optional main map layer. Terrain, satellite, hybrid or roadmap--if unspecified, defaults to roadmap.
       })
 
       this.map = new maps.Map(node, mapConfig); // creates a new Google map on the specified node (ref='map') with the specified configuration set above.
+
+      this.locations.forEach( location => { // iterate through locations saved in state
+
+console.log(location.markerGoogle);
+
+
+        const marker = new google.maps.Marker({ // creates a new Google maps Marker object.
+          position: {lat: location.location.lat, lng: location.location.lng}, // sets position of marker to specified location
+          map: this.map, // sets markers to appear on the map we just created on line 35
+          title: location.name // the title of the marker is set to the name of the location
+        });
+        // console.log(marker.setVisible(true));
+        
+      })
 
     }
   }
