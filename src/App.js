@@ -9,7 +9,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <h1> Google Maps API + React </h1>
+        <h1> Here my Nav component </h1>
 
         <MapContainer google={this.props.google} />
       </div>
