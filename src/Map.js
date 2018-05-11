@@ -6,11 +6,11 @@ class Map extends Component {
         this.loadMap();
     }
 
-    // componentDidUpdate(prevProps, prevState) {
-    //     if (prevProps.google !== this.props.google) {
-    //       this.loadMap();
-    //     }
-    // }
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.google !== this.props.google) {
+          this.loadMap();
+        }
+    }
     
     loadMap() {
         if (this.props && this.props.google) {
@@ -21,7 +21,7 @@ class Map extends Component {
             const divMapElement = ReactDOM.findDOMNode(mapRef);
 
             //setup the Map
-            let zoom = 14;
+            let zoom = 15;
             let lat = 37.774929;
             let lng = -122.419416;
             const center = new maps.LatLng(lat, lng);
