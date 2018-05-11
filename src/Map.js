@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import mapConfig from './mapConfig'
 
 class Map extends Component {
     componentDidMount() {
@@ -21,18 +22,20 @@ class Map extends Component {
             const divMapElement = ReactDOM.findDOMNode(mapRef);
 
             //setup the Map
-            let zoom = 15;
+            // let zoom = 15;
             let lat = 37.774929;
             let lng = -122.419416;
             const center = new maps.LatLng(lat, lng);
-            const mapConfig = Object.assign({}, {
+            const mapObj = Object.assign({}, {
               center: center,
-              zoom: zoom
+              zoom: mapConfig.zoom,
+              styles: mapConfig.styles,
+              mapTypeControl: mapConfig.mapTypeControl
             })
             //inst. the map
-            console.log(mapConfig);
+            console.log(mapObj);
             
-            this.map = new maps.Map(divMapElement, mapConfig);
+            this.map = new maps.Map(divMapElement, mapObj);
              
         }
     }
