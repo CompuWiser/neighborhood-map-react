@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import mapConfig from './mapConfig'
+import * as constants from './constants'
 
 class Map extends Component {
     componentDidMount() {
@@ -22,8 +23,7 @@ class Map extends Component {
             const divMapElement = ReactDOM.findDOMNode(mapRef);
 
             //setup the Map
-            let lat = 37.774929;
-            let lng = -122.419416;
+            const { lat, lng } = constants.neighborhood;
             const center = new maps.LatLng(lat, lng);
             const mapObj = Object.assign({}, {
               center: center,
