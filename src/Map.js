@@ -22,7 +22,6 @@ class Map extends Component {
             const divMapElement = ReactDOM.findDOMNode(mapRef);
 
             //setup the Map
-            // let zoom = 15;
             let lat = 37.774929;
             let lng = -122.419416;
             const center = new maps.LatLng(lat, lng);
@@ -33,11 +32,24 @@ class Map extends Component {
               mapTypeControl: mapConfig.mapTypeControl
             })
             //inst. the map
-            console.log(mapObj);
+            // console.log(mapObj);
             
             this.map = new maps.Map(divMapElement, mapObj);
              
         }
+    }
+
+    renderChildren() {
+        const {children} = this.props;
+
+        if (!children) return;
+
+        return React.Children.map(children, c => {
+            return React.cloneElement(c, {
+              map: this.map,
+              google: this.props.google
+            });
+          })
     }
 
     render() {
@@ -48,6 +60,7 @@ class Map extends Component {
         return (
             <div ref='map' className="map-container" style={style}>
                 Loading map...
+                {this.renderChildren()}
             </div>
         )
     }

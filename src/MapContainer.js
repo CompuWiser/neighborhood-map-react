@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Map from './Map'
+import Marker from './Marker'
 
 export default class MapContainer extends Component {
 
@@ -10,7 +11,9 @@ export default class MapContainer extends Component {
 
     return (
       <main className="main-container">
-        <Map google={this.props.google} />
+        <Map google={this.props.google}>
+          <Marker />
+        </Map>
       </main>
     )
   }
