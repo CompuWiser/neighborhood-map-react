@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import mapConfig from './mapConfig'
 import * as constants from './constants'
+import Marker from './Marker'
 
 class Map extends Component {
-    constructor(props) {
-        super(props)
-    }
 
     componentDidMount() {
         this.loadMap();
@@ -35,41 +33,30 @@ class Map extends Component {
               styles: mapConfig.styles,
               mapTypeControl: mapConfig.mapTypeControl
             })
-            //inst. the map
-            // console.log(mapObj);
             
+            //inst. the map            
             this.map = new maps.Map(divMapElement, mapObj);
-            
+            this.forceUpdate();
         }
     }
-
-    // renderChildren() {
-    //     const {children} = this.props;
-
-    //     if (!children) return;
-
-
-    //     return React.Children.map(children, c => {
-           
-    //         return React.cloneElement(c, {
-    //           map: this.mapInMap,
-    //           google: this.props.google,
-    //           position: children.props.position
-    //         });
-    //       })
-    // }
 
     render() {
         const style = {
             width: '100vw',
             height: '100vh'
           }
-          console.log(this.map);
-          
+         
         return (
             <div ref='map' className="map-container" style={style}>
                 Loading map...
-                {/* {this.renderChildren()} */}
+                {constants.locations.map( (location, index) => (
+                    <Marker   key={index} 
+                        google={this.props.google}
+                        map={this.map}
+                        title={'The marker`s title will appear as a tooltip.'}
+                        name={'SOMA'}
+                        position={location.location} />
+                ))}
             </div>
         )
     }
