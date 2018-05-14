@@ -36,6 +36,10 @@ class Map extends Component {
             
             //inst. the map            
             this.map = new maps.Map(divMapElement, mapObj);
+            //unique instance of Bounds
+            this.bounds = new google.maps.LatLngBounds();
+            //unique instance of infoWindow
+            this.largeInfowindow = new google.maps.InfoWindow();
             this.forceUpdate();
         }
     }
@@ -53,9 +57,11 @@ class Map extends Component {
                     <Marker   key={index} 
                         google={this.props.google}
                         map={this.map}
-                        title={'The marker`s title will appear as a tooltip.'}
-                        name={'SOMA'}
-                        position={location.location} />
+                        title={location.title}
+                        position={location.location} 
+                        bounds={this.bounds}
+                        largeInfowindow={this.largeInfowindow}
+                        />
                 ))}
             </div>
         )
