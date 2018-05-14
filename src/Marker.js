@@ -29,6 +29,7 @@ class Marker extends Component {
       };
       this.marker = new google.maps.Marker(pref);
       const marker = this.marker;
+
       // Create an onclick event to open the large infowindow at each marker.
       let self = this;
       marker.addListener('click', function() {
@@ -46,27 +47,39 @@ class Marker extends Component {
 
     // Check to make sure the infowindow is not already opened on this marker.
     if (infowindow.marker !== marker) {
-      let { map, google, bounds } = this.props;
+      let { map, google, bounds, title } = this.props;
       //set some Animation when MArker has cliked
       marker.setAnimation(google.maps.Animation.BOUNCE);
         setTimeout(function() {
           marker.setAnimation(null);
         }, 700);
-      
-      //Get some TIPs from Foursquare API
-      // $.getJSON('https://api.foursquare.com/v2/tips/search?v=20161016&ll=-3.738977%2C-38.539653&query=' + marker.title + '&limit=4&intent=match&client_id=AHDCBP0X3W1DX4IFXXXLDNFGWEOVFQVN1ZA4FMSX44YHO4X5&client_secret=44OKE3QF1REUWL5GB4V222BXW3CHRMO3OY4WQZJMIIHP1GRK',
-      //   function(data) {
-      //     var cont = '<h4>' + marker.title + '</h4>' + '<h6> Some Tips </h6>' + '<ul id="tips-places">';
-      //     $.each(data.response.tips, function(i,tip){
-      //       cont += '<li>' + tip.text + ' - ♥ ' + tip.likes.count + ' </li>';
-      //     });
-      //     cont += '<ul>';
-      //     infowindow.setContent(cont);
-      //   }).fail(function( jqxhr, textStatus, error ) {
-      //     var err = textStatus + ", " + error;
-      //     infowindow.setContent('<h4>' + marker.title + '</h4>' + '<h6> Some Tips </h6>' + '<ul id="tips-places">'+'<li> Oops! Something wrong occured, sorry just try again :) </li></ul>');
-      //     console.log( "Request Failed: " + err );
-      //   });
+
+        //Request related articles by NYT API
+        fetch(`https://api.foursquare.com/v2/tips/search?v=20161016&ll=-3.738977%2C-38.539653&query=${title}&limit=4&intent=match&client_id=AHDCBP0X3W1DX4IFXXXLDNFGWEOVFQVN1ZA4FMSX44YHO4X5&client_secret=44OKE3QF1REUWL5GB4V222BXW3CHRMO3OY4WQZJMIIHP1GRK`)
+            .then(response => response.json())
+            .then(addTips)
+            .catch(err => requestError(err, 'Foursquare'));
+
+            //if sucess
+            function addTips(data) {
+              let htmlResult = '';
+              if (data && data.response.tips) {
+                  const tipsData = data.response.tips;
+                  htmlResult = '<h4>' + title + '</h4><h6> Some Tips </h6><ul id="tips-places">';
+                  tipsData.forEach( tip => {
+                    htmlResult += '<li>' + tip.text + ' - ♥ ' + tip.likes.count + ' </li>';
+                  })
+                  htmlResult += '<ul>';
+              } else {
+                  htmlResult = '<p class="network-warning">Unfortunately, no <i>TIPs</i> was returned for your search.</p>';
+              }
+              infowindow.setContent(htmlResult);
+            }
+            //if Error
+            function requestError(err, part) {
+              console.log(err);
+              infowindow.setContent(`<p class="network-warning">Oh no! There was an error making a request for the ${part}.</p>`);
+            }            
       infowindow.marker = marker;
   
       // Make sure the marker property is cleared if the infowindow is closed.
