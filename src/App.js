@@ -4,12 +4,13 @@ import './App.css';
 import { GoogleApiWrapper } from 'google-maps-react' 
 // import child component
 import MapContainer from './MapContainer'
+import NavSearch from './NavSearch'
 
 class App extends Component {
   render() {
     return (
-      <div>
-        <h1> Here my Nav component </h1>
+      <div className="App">
+        <NavSearch />
 
         <MapContainer google={this.props.google} />
       </div>
