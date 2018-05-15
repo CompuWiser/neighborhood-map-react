@@ -54,13 +54,13 @@ class Marker extends Component {
           marker.setAnimation(null);
         }, 700);
 
-        //Request related articles by NYT API
+        //Request related TIPs by Foursquare API
         fetch(`https://api.foursquare.com/v2/tips/search?v=20161016&ll=-3.738977%2C-38.539653&query=${title}&limit=4&intent=match&client_id=AHDCBP0X3W1DX4IFXXXLDNFGWEOVFQVN1ZA4FMSX44YHO4X5&client_secret=44OKE3QF1REUWL5GB4V222BXW3CHRMO3OY4WQZJMIIHP1GRK`)
             .then(response => response.json())
             .then(addTips)
             .catch(err => requestError(err, 'Foursquare'));
 
-            //if sucess
+            //if sucess in Request
             function addTips(data) {
               let htmlResult = '';
               if (data && data.response.tips) {
@@ -75,7 +75,7 @@ class Marker extends Component {
               }
               infowindow.setContent(htmlResult);
             }
-            //if Error
+            //if Error in Request
             function requestError(err, part) {
               console.log(err);
               infowindow.setContent(`<p class="network-warning">Oh no! There was an error making a request for the ${part}.</p>`);

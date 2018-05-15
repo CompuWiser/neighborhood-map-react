@@ -40,6 +40,7 @@ class Map extends Component {
             this.bounds = new google.maps.LatLngBounds();
             //unique instance of infoWindow
             this.largeInfowindow = new google.maps.InfoWindow();
+            //force the update here to get this.map filled
             this.forceUpdate();
         }
     }
