@@ -51,6 +51,8 @@ class Map extends Component {
             height: '84vh'
           }
 
+          const { onChangeMarker } = this.props;
+
          
         return (
             <div ref='map' className="map-container" style={style}>
@@ -63,6 +65,7 @@ class Map extends Component {
                         position={location.location} 
                         bounds={this.bounds}
                         largeInfowindow={this.largeInfowindow}
+                        onChangeMarker={onChangeMarker} 
                         />
                 ))}
             </div>

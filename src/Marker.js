@@ -5,9 +5,7 @@ class Marker extends Component {
 
 
   componentDidUpdate(prevProps) {
-        
-    console.log(this);
-    
+ 
     if ((this.props.map !== prevProps.map) ||
         (this.props.position !== prevProps.position)) {
         this.renderMarker();
@@ -18,7 +16,7 @@ class Marker extends Component {
       this.marker.setMap(null);
     }
 
-    let { map, google, position, bounds, largeInfowindow } = this.props;
+    let { map, google, position, bounds, largeInfowindow, onChangeMarker } = this.props;
 
 
       let defaultIcon = this.makeMarkerIcon('0091ff');
@@ -33,6 +31,8 @@ class Marker extends Component {
       };
       this.marker = new google.maps.Marker(pref);
       const marker = this.marker;
+
+      onChangeMarker(this);
 
       // Create an onclick event to open the large infowindow at each marker.
       let self = this;
