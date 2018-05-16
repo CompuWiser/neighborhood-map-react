@@ -5,6 +5,9 @@ class Marker extends Component {
 
 
   componentDidUpdate(prevProps) {
+        
+    console.log(this);
+    
     if ((this.props.map !== prevProps.map) ||
         (this.props.position !== prevProps.position)) {
         this.renderMarker();
@@ -16,7 +19,8 @@ class Marker extends Component {
     }
 
     let { map, google, position, bounds, largeInfowindow } = this.props;
-      
+
+
       let defaultIcon = this.makeMarkerIcon('0091ff');
       
       let pos = position;

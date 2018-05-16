@@ -50,6 +50,7 @@ class Map extends Component {
             width: '100vw',
             height: '84vh'
           }
+
          
         return (
             <div ref='map' className="map-container" style={style}>

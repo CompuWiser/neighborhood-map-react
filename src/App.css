@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 .map-container {
   width: '100vw';
   height: '80vh';
@@ -50,6 +54,67 @@
   -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
   -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
   transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+.map-container {
+  /* height: 100%;
+  position: relative; */
+}
+
+.main-container {
+  bottom: 0px;
+  height: 100%;
+  left: 0px;
+  position: absolute;
+  right: 0px;
+}
+
+.close-list-box-btn {
+  cursor: pointer;
+  float: right;
+  color: #e45e5e;
+  border-style: solid;
+  border-width: 1px;
+  padding: 10px 10px;
+}
+
+.list-box {
+  background: #101010;
+  color: #fff;
+  border: 1px solid #999;
+  border-radius: 3px;
+  top: 87px;
+  height: 86vh;
+  padding: 15px 24px 30px 10px;
+  text-align: left;
+  width: 199px;
+  z-index: 10;
+  position: absolute;
+  -webkit-transform: translate(-300px, 0);
+  transform: translate(-300px, 0);
+  transition: transform 0.3s ease;
+  overflow-y: scroll;
+}
+
+.list-box.open {
+  -webkit-transform: translate(0px, 0);
+  transform: translate(0px, 0);
+}
+
+#list-of-places {
+  list-style: none;
+  padding-left: 10px;
+}
+
+#list-of-places li {
+  padding: 10px 0;
+  border-bottom: 1px #e45e5e dotted;
+  cursor: pointer;
+}
+
+.list-box-content {
+  width: 80%;
+  margin-top: 35px;
 }
 
 @media screen and (min-width: 475px) {
