@@ -8,29 +8,26 @@ export default class MapContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      locations: []
+      locationsGoogle: []
     }
-    this.locationsGoogle = [];
+    this.markersGoogle = [];
     this.onChangeMarker = this.onChangeMarker.bind(this);
   }
 
   onChangeMarker(marker) {
    
-    this.locationsGoogle.push(marker);
+    this.markersGoogle.push(marker);
 
-    if(this.locationsGoogle.length === constants.locations.length) {
-     this.setState({locations: this.locationsGoogle})
+    if(this.markersGoogle.length === constants.locations.length) {
+     this.setState({locationsGoogle: this.markersGoogle})
     }
   }
 
   render() {
 
-    console.log(this.state.locations);
-    
-
     return (
       <div className="map-container">
-        <ListFilter />
+        <ListFilter locationsGoogle={this.state.locationsGoogle} />
         <main className="main-container">
           <Map 
             google={this.props.google}

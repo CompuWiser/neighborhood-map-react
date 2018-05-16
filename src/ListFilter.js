@@ -7,7 +7,15 @@ class ListFilter extends Component {
         listFilter[0].classList.remove('open')
     }
 
+    setMarker(place) {
+        console.log(place);
+        place.marker.setVisible(false);
+    }
+
     render() {
+        const { locationsGoogle } = this.props;
+        console.log(locationsGoogle);
+        
         return (
             <aside className="list-box" >
                 <button id="close-btn" className="close-list-box-btn" onClick={() => this.closeList()}>
@@ -15,8 +23,9 @@ class ListFilter extends Component {
                 </button>
                 <div className="list-box-content">
                     <ul id="list-of-places">
-                        <li> teste </li>
-                        <li> teste </li>
+                        {locationsGoogle.map((location, index) => (
+                            <li key={index} onClick={(e) => this.setMarker(location)}> {location.props.title} </li>
+                        ))}
                     </ul>
                 </div>
             </aside>
