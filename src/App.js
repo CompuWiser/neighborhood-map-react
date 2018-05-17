@@ -35,10 +35,8 @@ class App extends Component {
       }
       return location;
     })
-    console.log(result);
-    
-    this.setState({ locationsGoogle: result })
-    
+
+    this.setState({ locationsGoogle: result });   
   }
 
   render() {

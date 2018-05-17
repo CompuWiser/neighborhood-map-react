@@ -5,8 +5,6 @@ import ListFilter from './ListFilter'
 
 export default class MapContainer extends Component {
 
-
-
   render() {
     const { google, onChangeMarker, locationsGoogle } = this.props;
 

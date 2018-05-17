@@ -13,7 +13,6 @@ class ListFilter extends Component {
 
     render() {
         const { locationsGoogle } = this.props;
-        console.log(locationsGoogle);
         
         return (
             <aside className="list-box" >
@@ -22,7 +21,7 @@ class ListFilter extends Component {
                 </button>
                 <div className="list-box-content">
                     <ul id="list-of-places">
-                        {locationsGoogle.map((location, index) => (
+                        {locationsGoogle.filter( location => location.marker.visible === true).map((location, index) => (
                             <li key={index} onClick={(e) => this.setMarker(location)}> {location.props.title} </li>
                         ))}
                     </ul>
