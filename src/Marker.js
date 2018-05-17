@@ -31,7 +31,7 @@ class Marker extends Component {
       };
       this.marker = new google.maps.Marker(pref);
       const marker = this.marker;
-      
+
       // Create an onclick event to open the large infowindow at each marker.
       let self = this;
       marker.addListener('click', function() {
@@ -73,7 +73,7 @@ class Marker extends Component {
                   tipsData.forEach( tip => {
                     htmlResult += '<li>' + tip.text + ' - ♥ ' + tip.likes.count + ' </li>';
                   })
-                  htmlResult += '<ul>';
+                  htmlResult += '<ul> <p style="float: right; padding-right: 10px;"><i><small>provided by Foursquare</small></i></p>';
               } else {
                   htmlResult = '<p class="network-warning">Unfortunately, no <i>TIPs</i> was returned for your search.</p>';
               }
