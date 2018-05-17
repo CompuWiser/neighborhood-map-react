@@ -7,6 +7,11 @@ class NavSearch extends Component {
         listFilter[0].classList.add('open')
     }
 
+    handleQuery(query) {
+        console.log(query);
+        
+    }
+
     render() {
         return (
             <nav className="navbar">
