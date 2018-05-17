@@ -15,6 +15,7 @@ class App extends Component {
     }
     this.markersGoogle = [];
     this.onChangeMarker = this.onChangeMarker.bind(this);
+    this.handleQuery = this.handleQuery.bind(this);
   }
 
   onChangeMarker(marker) {
@@ -25,10 +26,25 @@ class App extends Component {
      this.setState({locationsGoogle: this.markersGoogle})
     }
   }
+
+  handleQuery(query) {
+    let result = this.state.locationsGoogle.map( location => {
+      let matched = location.props.title.toLowerCase().indexOf(query) >= 0;
+      if (location.marker) {
+        location.marker.setVisible(matched);
+      }
+      return location;
+    })
+    console.log(result);
+    
+    this.setState({ locationsGoogle: result })
+    
+  }
+
   render() {
     return (
       <div className="App">
-        <NavSearch />
+        <NavSearch handleQuery={this.handleQuery} />
 
         <MapContainer 
           google={this.props.google}

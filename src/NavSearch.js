@@ -7,12 +7,8 @@ class NavSearch extends Component {
         listFilter[0].classList.add('open')
     }
 
-    handleQuery(query) {
-        console.log(query);
-        
-    }
-
     render() {
+        const { handleQuery } = this.props;
         return (
             <nav className="navbar">
                 <div className="navbar-header">
@@ -24,7 +20,7 @@ class NavSearch extends Component {
                                 id="search-input" 
                                 type="text"  
                                 placeholder="Filter" 
-                                onChange={(event) => this.handleQuery(event.target.value)}
+                                onChange={(event) => handleQuery(event.target.value)}
                                 onFocus={() => this.showList()}
                                 />
                         </div>
