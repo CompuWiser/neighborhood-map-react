@@ -8,8 +8,7 @@ class ListFilter extends Component {
     }
 
     setMarker(place) {
-        console.log(place);
-        place.marker.setVisible(false);
+        place.populateInfoWindow(place.marker, place.props.largeInfowindow)
     }
 
     render() {

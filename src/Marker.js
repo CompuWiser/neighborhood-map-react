@@ -31,14 +31,14 @@ class Marker extends Component {
       };
       this.marker = new google.maps.Marker(pref);
       const marker = this.marker;
-
-      onChangeMarker(this);
-
+      
       // Create an onclick event to open the large infowindow at each marker.
       let self = this;
       marker.addListener('click', function() {
         self.populateInfoWindow(this, largeInfowindow);
       });
+
+      onChangeMarker(this);
 
       bounds.extend(marker.position);
       map.fitBounds(bounds);
