@@ -13,7 +13,7 @@ class ListFilter extends Component {
 
     render() {
         const { locationsGoogle } = this.props;
-        
+
         return (
             <aside className="list-box" >
                 <button id="close-btn" className="close-list-box-btn" onClick={() => this.closeList()}>
