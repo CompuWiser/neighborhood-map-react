@@ -67,6 +67,8 @@ class Marker extends Component {
             //if sucess in Request
             function addTips(data) {
               let htmlResult = '';
+              console.log(data);
+              
               if (data && data.response.tips) {
                   const tipsData = data.response.tips;
                   htmlResult = '<h4>' + title + '</h4><h6> Some Tips </h6><ul id="tips-places">';
