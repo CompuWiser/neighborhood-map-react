@@ -58,24 +58,48 @@ class Marker extends Component {
           marker.setAnimation(null);
         }, 700);
 
-        //Request related TIPs by Foursquare API
-        fetch(`https://api.foursquare.com/v2/tips/search?v=20161016&ll=-3.738977%2C-38.539653&query=${title}&limit=4&intent=match&client_id=AHDCBP0X3W1DX4IFXXXLDNFGWEOVFQVN1ZA4FMSX44YHO4X5&client_secret=44OKE3QF1REUWL5GB4V222BXW3CHRMO3OY4WQZJMIIHP1GRK`)
+        infowindow.setContent('Loading...');
+        //Request related TIPs and Photos by Foursquare API
+        let venueId = null;
+        let tipsList = null;
+        fetch(`https://api.foursquare.com/v2/venues/search?ll=-3.738977,-38.539653&v=20180518&query=${title}&limit=1&client_id=AHDCBP0X3W1DX4IFXXXLDNFGWEOVFQVN1ZA4FMSX44YHO4X5&client_secret=44OKE3QF1REUWL5GB4V222BXW3CHRMO3OY4WQZJMIIHP1GRK`)
             .then(response => response.json())
-            .then(addTips)
+            .then(data => {
+              venueId = data.response.venues[0].id;
+              return fetch(`https://api.foursquare.com/v2/venues/${venueId}/tips?v=20180518&limit=4&client_id=AHDCBP0X3W1DX4IFXXXLDNFGWEOVFQVN1ZA4FMSX44YHO4X5&client_secret=44OKE3QF1REUWL5GB4V222BXW3CHRMO3OY4WQZJMIIHP1GRK`);
+            })
+            .then(response => response.json())
+            .then(dataTips => {
+              tipsList = dataTips;
+              return fetch(`https://api.foursquare.com/v2/venues/${venueId}/photos?v=20180518&limit=2&client_id=AHDCBP0X3W1DX4IFXXXLDNFGWEOVFQVN1ZA4FMSX44YHO4X5&client_secret=44OKE3QF1REUWL5GB4V222BXW3CHRMO3OY4WQZJMIIHP1GRK`);
+            })
+            .then(response => response.json())
+            .then(dataPhotos => addVenuesInfos(tipsList, dataPhotos))
             .catch(err => requestError(err, 'Foursquare'));
 
             //if sucess in Request
-            function addTips(data) {
+            function addVenuesInfos(tipsList, dataPhotos) {
               let htmlResult = '';
-              console.log(data);
               
-              if (data && data.response.tips) {
-                  const tipsData = data.response.tips;
-                  htmlResult = '<h4>' + title + '</h4><h6> Some Tips </h6><ul id="tips-places">';
+              if (tipsList && tipsList.response.tips.items) {
+                const tipsData = tipsList.response.tips.items;
+                const photosData = dataPhotos.response.photos.items;
+                  htmlResult = '<div class="infowindow-content"><h4>' + title + '</h4>';
+                  
+                  //Photos
+                  htmlResult += '<h6> Some Photos </h6> <div id="photos-places">';
+                  for(let i = 0; i < photosData.length; i++) {
+                    const photo = photosData[i];
+                    htmlResult += `<img style="width: 30%" src="${photo.prefix}150x150${photo.suffix}" />`;
+                    //htmlResult += `<img style="width: 30%" src="${photo.prefix}${photo.width}x${photo.height}${photo.suffix}" />`;
+                  }
+
+                  //Tips
+                  htmlResult += '</div><h6> Some Tips </h6> <ul id="tips-places">';
                   tipsData.forEach( tip => {
                     htmlResult += '<li>' + tip.text + ' - ♥ ' + tip.likes.count + ' </li>';
                   })
-                  htmlResult += '<ul> <p style="float: right; padding-right: 10px;"><i><small>provided by Foursquare</small></i></p>';
+                  htmlResult += '</ul> <p style="float: right; padding-right: 10px;"><i><small>provided by Foursquare</small></i></p> </div>';
               } else {
                   htmlResult = '<p class="network-warning">Unfortunately, no <i>TIPs</i> was returned for your search.</p>';
               }
