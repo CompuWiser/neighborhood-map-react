@@ -118,6 +118,9 @@ class Marker extends Component {
       });
   
       // Open the infowindow on the correct marker.
+      // google.maps.event.addDomListener(window, 'resize', function() {
+      //   infowindow.open(map, marker);
+      // });
       infowindow.open(map, marker);
       map.fitBounds(bounds);
       map.panTo(marker.getPosition());

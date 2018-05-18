@@ -112,6 +112,11 @@
   margin-top: 35px;
 }
 
+.infowindow-content {
+  width: 100%;
+  max-width: 225px;
+}
+
 @media screen and (min-width: 475px) {
   .map-container {
     height: '91vh';
@@ -135,5 +140,17 @@
   .list-box {
     top: 49px;
     height: 92vh;
+  }
+
+  .infowindow-content {
+    padding: 0 10px;
+    max-width: 430px;
+  }
+}
+
+@media screen and (min-width: 968px) {
+  .infowindow-content {
+    max-width: 800px;
+    padding: 0 15px;
   }
 }
