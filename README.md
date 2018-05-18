@@ -1,6 +1,8 @@
 # Neighborhood Map Tips
 I was challenged to developer a Map app using **ReactJS**, so a took the minimum requirements for this project and I read and made some draws of the components in a piece of paper.
 
+All I needed to do is to take a least 5 places in my neighborhood and show them on the map.
+
 After I made a kind of prototype I start the [create-react-app](https://github.com/facebook/create-react-app) to build my initial structure/sources to my local project.
 
 Before I start coding I read some articles about the best way to using **Google Maps API** with ReactJS, follow below:
