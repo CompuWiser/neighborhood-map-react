@@ -13,12 +13,12 @@ class NavSearch extends Component {
             <nav className="navbar">
                 <div className="navbar-header">
                     <h1 tabIndex="0" className="site-name">My Neighborhood Tips</h1>
-                    <div className="navbar-form navbar-left" role="search">
+                    <div className="navbar-form navbar-left" role="search" aria-label="Input filter places">
                         <div className="form-group">
                             <input 
                                 className="form-control" 
                                 id="search-input" 
-                                type="text"  
+                                type="search"  
                                 placeholder="Filter" 
                                 onChange={(event) => handleQuery(event.target.value)}
                                 onFocus={() => this.showList()}
