@@ -12,7 +12,7 @@ class NavSearch extends Component {
         return (
             <nav className="navbar">
                 <div className="navbar-header">
-                    <div className="site-name">My Neighborhood Tips</div>
+                    <h1 tabIndex="0" className="site-name">My Neighborhood Tips</h1>
                     <div className="navbar-form navbar-left" role="search">
                         <div className="form-group">
                             <input 

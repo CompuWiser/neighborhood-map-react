@@ -16,13 +16,14 @@ class ListFilter extends Component {
 
         return (
             <aside className="list-box" >
-                <button id="close-btn" className="close-list-box-btn" onClick={() => this.closeList()}>
+                <h2 tabIndex="0" className="offscreen">List of favorites places</h2>
+                <button role="presentation" aria-roledescription="Close button of list of places"  id="close-btn" className="close-list-box-btn" onClick={() => this.closeList()}>
                     X
                 </button>
                 <div className="list-box-content">
-                    <ul id="list-of-places">
+                    <ul tabIndex="0" role="tablist" id="list-of-places">
                         {locationsGoogle.filter( location => location.marker.visible === true).map((location, index) => (
-                            <li key={index} onClick={(e) => this.setMarker(location)}> {location.props.title} </li>
+                            <li tabIndex="0" role="presentation" key={index} onClick={(e) => this.setMarker(location)}> {location.props.title} </li>
                         ))}
                     </ul>
                 </div>
