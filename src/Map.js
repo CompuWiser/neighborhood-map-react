@@ -53,7 +53,6 @@ class Map extends Component {
 
           const { onChangeMarker } = this.props;
 
-         
         return (
             <div ref='map' style={style} className="map-container" >
                 Loading map...
