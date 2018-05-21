@@ -2,6 +2,7 @@
   "name": "neighborhood",
   "version": "0.1.0",
   "private": true,
+  "homepage" : "http://localhost/neighborhood-map-react",
   "dependencies": {
     "google-maps-react": "^1.1.0",
     "prop-types": "^15.6.1",

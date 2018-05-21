@@ -18,10 +18,9 @@
 }
 
 .map-container {
-  width: '100vw';
-  height: '80vh';
   top: 89px;
 }
+
 .navbar {
   text-align: center;
   top: 0;

@@ -48,14 +48,14 @@ class Map extends Component {
     render() {
         const style = {
             width: '100vw',
-            height: '84vh'
+            height: 'calc(100vh - 89px)'
           }
 
           const { onChangeMarker } = this.props;
 
          
         return (
-            <div ref='map' className="map-container" style={style}>
+            <div ref='map' style={style} className="map-container" >
                 Loading map...
                 {constants.locations.map( (location, index) => (
                     <Marker   key={index} 
