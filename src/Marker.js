@@ -90,8 +90,7 @@ class Marker extends Component {
                   htmlResult += '<h6> Some Photos </h6> <div id="photos-places">';
                   for(let i = 0; i < photosData.length; i++) {
                     const photo = photosData[i];
-                    htmlResult += `<img style="width: 30%" src="${photo.prefix}150x150${photo.suffix}" />`;
-                    //htmlResult += `<img style="width: 30%" src="${photo.prefix}${photo.width}x${photo.height}${photo.suffix}" />`;
+                    htmlResult += `<img alt="${title}, photo ${i + 1} by a visitor" style="width: 30%; margin-right: 5px;" src="${photo.prefix}150x150${photo.suffix}" />`;
                   }
 
                   //Tips
