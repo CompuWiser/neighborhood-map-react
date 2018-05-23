@@ -23,7 +23,7 @@ class ListFilter extends Component {
                 <div className="list-box-content">
                     <ul tabIndex="0" role="tablist" aria-label="List of favorites places" id="list-of-places">
                         {locationsGoogle.filter( location => location.marker.visible === true).map((location, index) => (
-                            <li tabIndex="0" role="listitem" key={index} onClick={(e) => this.setMarker(location)}> {location.props.title} </li>
+                            <li tabIndex="0" role="tab" key={index} onClick={(e) => this.setMarker(location)}> {location.props.title} </li>
                         ))}
                     </ul>
                 </div>
