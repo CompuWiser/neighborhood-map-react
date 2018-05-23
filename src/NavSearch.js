@@ -4,7 +4,10 @@ class NavSearch extends Component {
 
     showList() {
         let listFilter = document.getElementsByTagName('aside');
-        listFilter[0].classList.add('open')
+        if(listFilter[0]) {
+            listFilter[0].classList.add('open')
+        }
+        
     }
 
     render() {

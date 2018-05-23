@@ -42,6 +42,10 @@ class Map extends Component {
             this.largeInfowindow = new google.maps.InfoWindow();
             //force the update here to get this.map filled
             this.forceUpdate();
+        } else {
+            console.log('Ops! We cant access Google Maps API for now!')
+            let mapContainerElemt = document.querySelector('.map-container');
+            mapContainerElemt.innerHTML = '<div class="error-msg">Ops! We cant access Google Maps API for now! </div>'
         }
     }
 
