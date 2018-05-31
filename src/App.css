@@ -145,7 +145,6 @@
 
 @media screen and (min-width: 475px) {
   .map-container {
-    height: '91vh';
     top: 50px;
   }
 

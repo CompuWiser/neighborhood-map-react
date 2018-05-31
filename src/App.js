@@ -6,6 +6,7 @@ import { GoogleApiWrapper } from 'google-maps-react'
 import MapContainer from './MapContainer'
 import NavSearch from './NavSearch'
 import * as constants from './constants'
+// import ReactGoogleMapLoader from "react-google-maps-loader"
 
 class App extends Component {
   constructor(props) {
@@ -39,7 +40,7 @@ class App extends Component {
     this.setState({ locationsGoogle: result });   
   }
 
-  render() {
+  render() {    
     return (
       <div className="App">
         <NavSearch handleQuery={this.handleQuery} />

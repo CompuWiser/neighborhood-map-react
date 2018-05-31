@@ -6,7 +6,7 @@ import Marker from './Marker'
 
 class Map extends Component {
 
-    componentDidMount() {
+    componentDidMount() { 
         this.loadMap();
     }
 
@@ -40,7 +40,22 @@ class Map extends Component {
             this.bounds = new google.maps.LatLngBounds();
             //unique instance of infoWindow
             this.largeInfowindow = new google.maps.InfoWindow();
-            //force the update here to get this.map filled
+
+            //resize the map 
+            checkSizeWindow(window);
+            maps.event.addDomListener(window, 'resize', function(e) {
+                checkSizeWindow(e.currentTarget)
+            });
+
+            function checkSizeWindow(objWindow){
+                if(objWindow.innerWidth < 475) {
+                    divMapElement.style.height = 'calc(100vh - 89px)';
+                } else {
+                    divMapElement.style.height = '91vh';
+                }
+            }
+
+            //force the update here to get this.map filled         
             this.forceUpdate();
         } else {
             console.log('Ops! We cant access Google Maps API for now!')
@@ -52,10 +67,10 @@ class Map extends Component {
     render() {
         const style = {
             width: '100vw',
-            height: 'calc(100vh - 89px)'
+            height: '100vh'
           }
 
-          const { onChangeMarker } = this.props;
+        const { onChangeMarker } = this.props;
 
         return (
             <div ref='map' style={style} className="map-container" >
