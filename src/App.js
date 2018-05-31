@@ -1,12 +1,22 @@
 import React, { Component } from 'react';
 import './App.css';
-// import the Google Maps API Wrapper from google-maps-react
 import { GoogleApiWrapper } from 'google-maps-react' 
+import * as constants from './constants'
 // import child component
 import MapContainer from './MapContainer'
 import NavSearch from './NavSearch'
-import * as constants from './constants'
-// import ReactGoogleMapLoader from "react-google-maps-loader"
+
+//Handling when  Google's API have any Problem on the request
+document.addEventListener("DOMContentLoaded", function(e) {
+  let scriptTag = document.getElementsByTagName('SCRIPT').item(1);
+  scriptTag.onerror = function(e) {
+    console.log('Ops! We cant access Google Maps API for now!')
+    let mapContainerElemt = document.querySelector('#root');
+    let erroElement = document.createElement('div');
+    erroElement.innerHTML = '<div class="error-msg">Ops! We cant access Google Maps API for now! </div>'
+    mapContainerElemt.appendChild(erroElement)
+  }
+})
 
 class App extends Component {
   constructor(props) {
